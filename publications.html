@@ -5,183 +5,151 @@
 <script src="partials/w3data.js"></script>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 <div w3-include-html="partials/header.html"></div> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="assets/js/bibtex_js.js" type="text/javascript" charset="utf-8"></script>
+    <bibtex src="paper/MyPaperList.bib"></bibtex>
+
+    <script>
+        $(function() {
+          $("#Fontselector").on("change",function() {
+            var font = $("#Fontselector option:selected").text();
+            console.log(font);
+        
+            $('.title.fonters').each(function() {
+                $(this).css("font-family",font);
+            });
+          }); 
+        });   
+        function reset() {
+            $("select").each(function () {
+              localStorage.setItem($(this).attr("id"),"");
+              $(this).val("");
+            }); 
+            $("#searchbar").val("");
+            $("#searchbar").trigger('change');
+        }
+    </script>
+    
+    <style>
+        
+        bibtex { display: none; }
+        .searchbar { margin-left:0px;}
+        #bibtex_errors { margin-top:10px; color: red;}
+        h1.header {margin-left:8px;}
+        h1.YEAR { font-size: 17px; font-weight: bold; display: inline; margin-left:8px;}
+        select {
+          height: 33px;
+        }
+        #search_area {
+              padding-bottom: 20px;
+        }
+    </style>
+    
+    <!-- Latest compiled and minified CSS -->
+    
 <body>
     <div w3-include-html="partials/nav.html?nav=publications"></div> 
     <div class="wrapper">
         <div w3-include-html="partials/sider.html"></div> 
         <div class="main-wrapper">
-            <!-- start -->
 
- <script type="text/javascript">
 
-    var papernumber=1;
-
-    function display(id){
-        var traget=document.getElementById(id);
-        if(traget.style.display=="none"){
-            traget.style.display="";
-        }else{
-            traget.style.display="none";
-        }
-    }
-
-    function getNumbers(){
-        return papernumber++;
-    }
-
-    function printNumber(){
-        document.write(getNumbers());
-    }
-
-</script>
-
+<!-- start -->
 <section class="section book-section">
-    <h2 class="section-title"><i class="fa fa-book"></i>Submitted Journals</h2>
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Yuanfang Chi, Conghui Zhou, Chaojie Zhu and Victor C. M. Leung, "UBCGaming: Ubiquitous Cloud Gaming System", <b>IEEE System Journal</b>, in revision.
-    </div>
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Fangyuan Chi, Xiaofei Wang, and Victor C. M. Leung, "Toward Multiplayer Cooperative Cloud Gaming", <b>IEEE Cloud Computing</b>, in revision.
-    </div>
-
+    <h2 class="section-title"><i class="fa fa-book"></i>Publications</h2>
+    <div class="container-fluid" id="search_area">
+        <div style="">
+          <input type="text" class="bibtex_search form-control" id="searchbar" placeholder="Search publications">
+          <!-- <span class="help-block">Example: journal 2015 (finds the intersection of the two terms)</span> -->
+        </div>
     
+        <div style="float:left;">
+          <select id="authorselectfirst" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" extra="first" search="author">
+            <option value="">Search First Author</option>
+          </select>
+        </div>
+        <div style="float:left;">
+          <select id="authorselect" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" search="author">
+            <option value="">Search Author</option>
+          </select>
+        </div>
+        <div style="float:left;">
+          <select id="topicselect" class="btn bibtex_search" style="border: 1px solid lightgrey;">
+            <option value="">Search Type</option>
+            <!-- Add topic values here -->
+            <option value="journal">Journal</option>
+            <option value="conference">Conference</option>
+            <option value="chapter">Book Chapter</option>
+          </select>
+        </div>
+        <div class="searchbar">
+          <div style="float:left;">
+          <button type="button" class="btn btn-default" onclick="reset()">Reset</button>
+          </div>
+        </div>
+    </div>
 
+<div class="bibtex_structure">
+  <div class="group year" extra="ASC number">
+      <a href="#top" style="display: inline"> &nbsp;&#x025B4;Top </a>
+      <div style="padding-bottom:10px;"></div>
+      <div class="sort journal" extra="DESC string">
+        <div class="templates"></div>
+      </div>
+  </div>
+</div>
+
+<!-- <div class="bibtex_structure">
+  <div class="sections bibtextypekey">
+      <div class="section @article" title="Refereed Articles"></div>
+      <div class="section @book" title="Books"></div>
+      <div class="section @inproceedings" title="Conference and Workshop Papers"></div>
+      <div class="section @misc|@phdthesis|@mastersthesis|@bachelorsthesis|@techreport" title="Other Publications"></div>
+      <div class="templates"></div>
+  </div>
+</div> -->
+
+<div id="bibtex_display">
+  
+  <div class="bibtex_template" style="display: none;">
+    <ul> <li>
+      <span class="if title">
+        <a class="bibtexVar" href="paper/+BIBTEXKEY+.pdf" extra="BIBTEXKEY">
+            <span style="text-decoration: underline;" class="title"></span>,
+        </a>
+      </span>
+      <div class="if author">
+        <span class="author"></span>
+      </div>
+      <div>
+        <span class="if journal"><em><span class="journal"></span></em>,</span>
+        <span class="if publisher"><em><span class="publisher"></span></em>,</span>
+        <span class="if booktitle">In <em><span class="booktitle"></span></em>,</span>
+        <span class="if address"><span class="address"></span>,</span>
+        <span class="if month"><span class="month"></span>,</span>
+        <span class="if year"><span class="year"></span>.</span>
+        <span class="if note"><span class="note"></span></span>
+        <a class="bibtexVar" role="button" data-toggle="collapse" href="#bib+BIBTEXKEY+" aria-expanded="false" aria-controls="bib+BIBTEXKEY+" extra="BIBTEXKEY">
+          [bib]
+        </a>
+      </div>
+      <div class="bibtexVar collapse" id="bib+BIBTEXKEY+" extra="BIBTEXKEY">
+          <div class="well">
+            <pre><span class="bibtexraw noread"></span></pre>
+          </div>
+      </div>
+      <div style="display:none"><span class="bibtextype"></span></div>
+    </li></ul>
+  </div>
+  
+</div>
 </section>
 
-<section class="section book-section">
-    <h2 class="section-title"><i class="fa fa-book"></i>Book Chapter</h2>
 
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Fangyuan Chi and Victor C.M. Leung, "<I>Cloud Gameing</I>" Chapter, <b>Encyclopedia of Cloud Computing</b>, Wiley Press, 2015. Wiley-IEEE, 2015 ISBN-13: 978-1118821978; ISBN-10: 1118821971  <a href="https://sites.google.com/site/encyclopediaofcloudcomputing/" target="_blank">[LINK]</a> 
-    </div>
-
-</section>
-
-<section class="section journals-section">
-    <h2 class="section-title"><i class="fa fa-book"></i>First-Author Journals</h2>
-
-    <!-- -->
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Yuanfang Chi, and Victor C. M. Leung, "Cognitive Gaming", in <b>IT Professional</b>, Jul/Aug, 2017.  <a href="paper/Wei_2017_ITPro.pdf" target="_blank">[PDF]</a><a href="" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Ryan Shea, Chun-Ying Huang, Kuan-Ta Chen, Jiangchuan Liu, Victor C. M. Leung, and Cheng-Hsin Hsu, "A Survey on Cloud Gaming: Future of Computer Games",  in <b>IEEE Access</b>, vol. 4, pp. 7605-7620, 2016.  <a href="paper/Wei_2016_IEEEAccess.pdf" target="_blank">[PDF]</a><a href="http://ieeexplore.ieee.org/document/7536162/" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Ryan Shea, Chun-Ying Huang, Kuan-Ta Chen, Jiangchuan Liu, Victor C. M. Leung, and Cheng-Hsin Hsu, "The Future of Cloud Gaming",  in <b>Proceedings of the IEEE</b>, vol.104, no.4, pp.687-691, April, 2016. <!--(DOI: 10.1109/JPROC.2016.2539418)--><a href="paper/Wei_2016_PIEEE.pdf" target="_blank">[PDF]</a><a href="http://ieeexplore.ieee.org/document/7435392/" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Zhen Hong, Xiaofei Wang, Henry C.B. Chan and Victor C.M. Leung, "Quality of Experience Optimization for Cloud Gaming System with Ad-hoc Cloudlet Assistance", IEEE Transactions on Circuits and Systems for Video Technology (<b>TCSVT</b>), vol.25, no.12, pp.1-14, 2015. <!--(DOI: 10.1109/TCSVT.2015.2450153)--><a href="paper/Wei_2015_TCSVT1.pdf" target="_blank">[PDF]</a><a href="http://ieeexplore.ieee.org/document/7137673/" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Henry C.B. Chan, Xiaofei Wang and Victor C.M. Leung, "Cognitive Resource Optimization for Decomposed Cloud Gaming Platform", IEEE Transactions on Circuits and Systems for Video Technology (<b>TCSVT)</b>, vol.25, no.12, pp.1-14, 2015. <!--(DOI: 10.1109/TCSVT.2015.2450171)--><a href="paper/Wei_2015_TCSVT2.pdf" target="_blank">[PDF]</a><a href="http://ieeexplore.ieee.org/document/7137648/" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Min Chen, and Victor C.M. Leung, "Toward Gaming as a Service," <b>IEEE Internet Computing</b>, vol.18, no.3, pp.12-18, May-June, 2014. <!--(DOI: 10.1109/MIC.2014.22)--><a href="paper/Wei_2014_IC.pdf" target="_blank">[PDF]</a><a href="http://ieeexplore.ieee.org/document/6818918/" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Victor C.M. Leung and Long Hu, "A Cloudlet-Assisted Multiplayer Cloud Gaming System", ACM/Springer Mobile Networks and Applications (<b>MONET</b>), Vol. 19, No. 2, pp. 144-152, April 2014. <!--(DOI: 10.1007/s11036-013-0485-4)--><a href="paper/Wei_2014_MONET.pdf" target="_blank">[PDF]</a><a href="http://dl.acm.org/citation.cfm?id=2843716" target="_blank">[LINK]</a></div>
-    <div class="item"> [<script>printNumber();</script>] <b>Wei Cai</b>, Min Chen, Takahiro Hara, Lei Shu and Taekyoung Kwon, "A Genetic Algorithm Approach to Multi-Agent Itinerary Planning in Wireless Sensor Network", ACM/Springer Mobile Networks and Applications (<b>MONET</b>), Vol.16, No.6, pp. 782-793, December 2011. <!--(DOI: 10.1007/s11036-010-0269-z)--><a href="paper/Wei_2010_MONET.pdf" target="_blank">[PDF]</a><a href="http://link.springer.com/article/10.1007/s11036-010-0269-z" target="_blank">[LINK]</a></div>
-
-</section><!--//section-->
-
-<section class="section conferences-section">
-<h2 class="section-title"><i class="fa fa-book"></i>First-Author Conferences</h2>
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Chaojie Zhu, Yuanfang Chi and Victor C.M. Leung, "<I>Balancing Cloud and Mobile Terminal: An Empirical Study on Decomposed Cloud Gaming</I>", in Proceedings of The IEEE 9th International Conference on Cloud Computing Technology and Science (<b>CloudCom2017</b>), Hong Kong, December 11-14, 2017. <a href="paper/Wei_2017_CloudCom.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> </a> <a href="" target="_blank">[LINK]</a> 
-    </div>
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Conghui Zhou, Minchen Li, Xiuhua Li and Victor C.M. Leung, "<I>MCG Test-bed: An Experimental Test-bed for Mobile Cloud Gaming</I>", in Proceedings of the 2nd Workshop on Mobile Gaming (<b>MobiGames2015</b>), Florence, Italy, May 18-22, 2015. <a href="paper/Wei_2015_MobiGames.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> </a> <a href="http://dl.acm.org/citation.cfm?id=2751501" target="_blank">[LINK]</a> 
-    </div>
+<!-- end -->
 
 
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b> and Victor C.M. Leung, "<I>Decomposed Cloud Games: Design Principles and Challenges</I>", in Proceeding of The 2014 IEEE International Conference on Multimedia and Expo (<b>ICME2014</b>), Chengdu, China, July 14-18, 2014. <a href="paper/Wei_2014_ICME.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> </a> <a href="http://www.icme2014.org/" target="_blank">[LINK]</a> 
-    </div>
-
-
-
-
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Min Chen, Conghui Zhou, Victor C.M. Leung and Henry C.B. Chan, "<I>Resource Management for Cognitive Cloud Gaming</I>", in Proceeding of The 2014 IEEE International Conference on Communications (<b>ICC2014</b>), pp.3462-3467, Sydney, Austrailia, June 10-14, 2014. <a href="paper/Wei_2014_ICC.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> </a> <a href="http://icc2014.ieee-icc.org/" target="_blank">[LINK]</a> 
-    </div>
-
-
-
-
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Conghui Zhou, Victor C.M. Leung and Min Chen, "<I>A Cognitive Platform for Mobile Cloud Gaming</I>", in Proceeding of The IEEE 5th International Conference on Cloud Computing Technology and Science (<b>CloudCom2013</b>), pp.72-79, Bristol, UK, December 2-5, 2013. <a href="paper/Wei_2013_CLOUDCOM.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> <a href="http://2013.cloudcom.org/" target="_blank">[LINK]</a>
-    </div>
-
-    <!--    
-
-    <div class="item">[<script>printNumber();</script>]
-    Hasen Nicanfar, Qiang Liu, Peyman TalebiFard, <b>Wei Cai</b> and Victor C.M. Leung, "<I>Community Cloud: Concept, Model, Attacks and Solution</I>", in Proceeding of The IEEE 5th International Conference on Cloud Computing Technology and Science (<b>CloudCom2013</b>), Bristol, UK, December 2-5, 2013. <a href="paper/Wei_2013_CLOUDCOM2.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> <a href="http://2013.cloudcom.org/" target="_blank">[LINK]</a>
-    </div>
-
-    --> 
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Conghui Zhou, Victor C.M. Leung and Min Chen, "<I>Environment Perception for Cognitive Cloud Gaming</I>", in Proceeding of the 4th International Conference on Cloud Computing (<b>CloudComp2013</b>), pp.3-13, Wuhan, China, Octorber 17-19, 2013. <a href="paper/Wei_2013_CLOUDCOMP.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> <a href="http://cloudcomp.eu/2013/show/home" target="_blank">[LINK]</a>
-    </div>
-
-    <!--
-
-    <div class="item">[<script>printNumber();</script>]
-    Kan Zheng, Hanlin Meng, Hua Zhu, Kai Lin, <b>Wei Cai</b> and Hang Long, "<I>Delay-Optimized Offloading for Mobile Cloud Computing Services in Heterogenous Networks</I>", in Proceeding of the 4th International Conference on Cloud Computing (<b>CloudComp2013</b>), Wuhan, China, Octorber 17-19, 2013. <a href="paper/Wei_2013_CLOUDCOMP2.pdf" target="_blank">[PDF]</a> <a href="" target="_blank"> <a href="http://cloudcomp.eu/2013/show/home" target="_blank">[LINK]</a>
-    </div>
-
-    <div class="item">[<script>printNumber();</script>]
-    <td>Min Chen, Yujun Ma, Sana Ullah, <b>Wei Cai</b>, Enmin Song, "<I>ROCHAS: Robotics and Cloud-assisted Healthcare System for Empty Nester</I>", to appear in the 8th International Conference on Body Area Networks(<b>BODYNETS2013</b>), Boston, Massachusetts, USA, September 30-October 2, 2013. <a href="paper/Wei_2013_BODYNETS.pdf" target="_blank">[PDF]</a> <a href="http://bodynets.org/2013/show/home" target="_blank">[LINK]</a>
-    </div>
-
-    --> 
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Victor C.M. Leung and Min Chen, "<I>Next Generation Mobile Cloud Gaming</I>", in Proceeding of IEEE 7th International Symposium on Service Oriented System Engineering (<b>SOSE2013</b>), pp.551-560, Hotel Sofitel, San Francisco Bay, USA, March 25-28, 2013. <a href="paper/Wei_2013_MOBILECLOUD.pdf" target="_blank">[PDF]</a> <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6525574" target="_blank">[LINK]</a>
-    </div>
-
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b> and Victor C.M. Leung, "<I>Multiplayer Cloud Gaming System with Cooperative Video Sharing</I>", in Proceeding of 4th IEEE International Conference on Cloud Computing Technology and Science (<b>CloudCom2012</b>), pp.640-645, Taipei, Taiwan, December 3-6, 2012. <a href="paper/Wei_2012_CLOUDCOM.pdf" target="_blank">[PDF]</a> <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6427515" target="_blank">[LINK]</a>
-    </div>
-
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Gene Cheung, Sung-Ju Lee and Ted Taekyoung Kwon, "<I>Optimal Frame Structure Design Using Landmarks for interactive Light Field Streaming</I>", in Proceeding of IEEE International Conference on Acoustics, Speech and Signal Processing (<b>ICASSP2012</b>), pp.1445-1448, Kyoto, Japan, March 2012. <a href="paper/Wei_2012_ICASSP.pdf" target="_blank">[PDF]</a> <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6288163" target="_blank">[LINK]</a>
-    </div>
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Gene Cheung, Ted Taekyoung Kwon and Sung-Ju Lee, "<I>Optimized Frame Structure for Interactive Light Field Streaming with Cooperative Cache</I>", in Proceeding of IEEE International Conference on Multimedia and Expo (<b>ICME2011</b>), pp.1-6, Barcelona, Spain, July 2011. <a href="paper/Wei_2011_ICME.pdf" target="_blank">[PDF]</a> <a href="http://ieeexplore.ieee.org/search/srchabstract.jsp?tp=&arnumber=6011865" target="_blank">[LINK]</a>
-    </div>
-
-    <!--
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Xianghao Li, Xiaoxuan Bai, Sishen Zhou, Taekyoung Kwon and Yanghee Choi, "<I>How do we make friends in Online Social Networks</I>", in Proceeding of Korea Information and Communications Society Winter Conference '11 (<b>KICS2011Winter</b>), Yongpyong, Gangwondo, Korea, February, 2011. <a href="paper/Wei_2011_KICS.pdf" target="_blank">[PDF]</a> <a href="paper/KICS2011Winter.pdf" target="_blank">[LINK]</a></div>
-
-    <!--
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Zhijun Chen, Xinlong Feng, and Wenhua Zeng, "<I>A Multi-Agent Grouping Algorithm in Wireless Sensor Networks</I>", Journal of System Simulation, Vol.22, No.12, pp.2890-2894, Dec, 2010. (ISSN: 1004-731X) (in Chinese) <a href="paper/Wei_2010_JSS.pdf" target="_blank">[PDF]</a> <a href="http://en.cnki.com.cn/Article_en/CJFDTOTAL-XTFZ201012027.htm" target="_blank">[LINK]</a></div>
-
-    -->
-    <!---->
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Xiaofei Wang, Min Chen and Yan Zhang, "<I>MMOPRG Traffic Measurement, Modeling and Generator over WiFi and WiMax</I>", in Proceeding of IEEE Global Communications Conference (<b>GLOBECOM2010</b>), pp.1-5, Miami, Florida, USA, December, 2010. <a href="paper/Wei_2010_GLOBECOM.pdf" target="_blank">[PDF]</a> <a href="http://ieeexplore.ieee.org/search/srchabstract.jsp?tp=&arnumber=5684141" target="_blank">[LINK]</a>
-    </div>
-
-    <!--
-
-    <div class="item">[<script>printNumber();</script>]
-    <td>Min Chen, <b>Wei Cai</b>, Sergio Gonzalez, and Victor C.M. Leung, "<I>Balanced Itinerary Planning for Multiple Mobile Agents in Wireless Sensor Networks</I>", in Proceeding of the Second International Conference on Ad Hoc Networks (<b>ADHOCNETS2010</b>), Victoria, British Columbia, Canada, August, 2010. <a href="paper/Wei_2010_ADHOCNETS.pdf" target="_blank">[PDF]</a> <a href="http://www.springerlink.com/content/v1580l542m23h304/" target="_blank">[LINK]</a>
-    </div>
-
-    -->
-
-    <div class="item">[<script>printNumber();</script>]
-    <b>Wei Cai</b>, Min Chen, Takahiro Hara and Lei Shu, "<I>GA-MIP: Genetic Algorithm based Multiple Mobile Agents Itinerary Planning in Wireless Sensor Network</I>", in Proceeding of the 5th Annual International Wireless Internet Conference (<b>WICON2010</b>), pp.1-8, Singapore, March, 2010. <a href="paper/Wei_2010_WICON.pdf" target="_blank">[PDF]</a> <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=5452656" target="_blank">[LINK]</a>
-    </div>
-
-</section><!--//section-->
-           
-
-
-            <!-- end -->
         </div><!--//main-body-->
     </div>
     <div w3-include-html="partials/footer.html"></div> 
