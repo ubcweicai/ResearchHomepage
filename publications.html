@@ -29,6 +29,8 @@
             $("#searchbar").val("");
             $("#searchbar").trigger('change');
         }
+
+        
     </script>
     
     <style>
@@ -36,13 +38,16 @@
         bibtex { display: none; }
         .searchbar { margin-left:0px;}
         #bibtex_errors { margin-top:10px; color: red;}
-        h1.header {margin-left:8px;}
-        h1.YEAR { font-size: 17px; font-weight: bold; display: inline; margin-left:8px;}
+        /*h1.header {margin-left:8px;}*/
+        h1 { font-size: 20px; font-weight: bold; display: inline; margin-left:8px;}
         select {
           height: 34px;
         }
         #search_area {
               padding-bottom: 20px;
+        }
+        .section {
+          margin-bottom: 8px !important;
         }
     </style>
     
@@ -90,7 +95,7 @@
         </div>
     </div>
 
-<div class="bibtex_structure">
+<!-- <div class="bibtex_structure">
   <div class="group year" extra="DESC string">
       <a href="#top" style="display: inline"> &nbsp;<b>&#x025B4;Top</b> </a>
       <div style="padding-bottom:10px;"></div>
@@ -98,17 +103,24 @@
         <div class="templates"></div>
       </div>
   </div>
-</div>
+</div> -->
 
-<!-- <div class="bibtex_structure">
+<!-- <div class="bibtex_topics"> </div> -->
+
+<div class="bibtex_structure">
   <div class="sections bibtextypekey">
       <div class="section @article" title="Refereed Articles"></div>
-      <div class="section @book" title="Books"></div>
       <div class="section @inproceedings" title="Conference and Workshop Papers"></div>
+      <div class="section @book" title="Books"></div>
+      <div class="section @incollection" title="Books Chapters"></div>
       <div class="section @misc|@phdthesis|@mastersthesis|@bachelorsthesis|@techreport" title="Other Publications"></div>
-      <div class="templates"></div>
+      <div class="section @majorsubmit" title="Major Revision Submitted"></div>
+      <div class="section @submit" title="Submitted"></div>
+      <div class="sort year" extra="DESC string">
+        <div class="templates"></div>
+      </div>
   </div>
-</div> -->
+</div>
 
 <div id="bibtex_display">
   
