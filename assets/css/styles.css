@@ -26,8 +26,8 @@ dark
 */
 
 .navbar-inverse {
-    background: rgba(117,15,109,0.8);
-    border-color: rgba(117,15,109,0.8);
+    background: rgba(117,15,109,0.7);
+    border-color: rgba(117,15,109,0.7);
 }
 
 .wrapper {
@@ -40,7 +40,7 @@ dark
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .sidebar-wrapper {
-  background: rgba(117,15,109,0.8);
+  background: rgba(117,15,109,0.7);
   position: absolute;
   right: 0;
   width: 305px;
@@ -51,7 +51,7 @@ dark
 
 .sidebar-wrapper .profile-container {
   padding: 30px;
-  background: rgba(117,15,109,0.9);
+  background: rgba(117,15,109,0.4);
   text-align: center;
   color: #fff;
 }
