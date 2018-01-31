@@ -31,7 +31,7 @@ dark
 }
 
 .wrapper {
-  background: #750F6D;
+  background: #FFFFFF;
   max-width: 960px;
   margin: 40px auto;
   position: relative;
@@ -40,13 +40,15 @@ dark
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .sidebar-wrapper {
-  background: rgba(117,15,109,0.7);
+  /*background: rgba(117,15,109,0.7);*/
+  /*background-color: #DED5E8;*/
   position: absolute;
   right: 0;
   width: 305px;
   height: 100%;
-  min-height: 800px;
-  color: #fff;
+  /*min-height: 800px;*/
+  color: #750F6D;
+  padding: 30px 10px;
 }
 
 .sidebar-wrapper .profile-container {
@@ -167,7 +169,7 @@ p a {
 body {
   font-family: 'Roboto', sans-serif;
   color: #545E6C;
-  background: #f5f5f5;
+  background: #F1F1F1;
   font-size: 14px;
   padding: 30px 0px 30px 0px;
   -webkit-font-smoothing: antialiased;
