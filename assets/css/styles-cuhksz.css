@@ -32,7 +32,6 @@ dark
 
 .wrapper {
   background: #FFFFFF;
-  min-width: 960px;
   max-width: 960px;
   margin: 40px auto;
   position: relative;
@@ -376,7 +375,18 @@ p {
 }
 /* Small devices (tablets, 768px and up) */
 /* Medium devices (desktops, 992px and up) */
+
+@media (min-width: 768px){
+
+  .wrapper{
+    min-width: 960px;
+
+  }
+}
+
 @media (min-width: 992px) {
+  
+
   .skillset .level-title {
     display: inline-block;
     float: left;
