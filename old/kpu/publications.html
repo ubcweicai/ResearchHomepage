@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<script src="partials/w3data.js"></script>
+<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+<div w3-include-html="partials/header.html"></div> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="assets/js/bibtex_js.js" type="text/javascript" charset="utf-8"></script>
+    <bibtex src="paper/MyPaperList.bib"></bibtex>
+
+    <script>
+        $(function() {
+          $("#Fontselector").on("change",function() {
+            var font = $("#Fontselector option:selected").text();
+            console.log(font);
+        
+            $('.title.fonters').each(function() {
+                $(this).css("font-family",font);
+            });
+          }); 
+        });   
+        function reset() {
+            $("select").each(function () {
+              localStorage.setItem($(this).attr("id"),"");
+              $(this).val("");
+            }); 
+            $("#searchbar").val("");
+            $("#searchbar").trigger('change');
+        }
+
+        
+    </script>
+    
+    <style>
+        
+        bibtex { display: none; }
+        .searchbar { margin-left:0px;}
+        #bibtex_errors { margin-top:10px; color: red;}
+        /*h1.header {margin-left:8px;}*/
+        h1 { font-size: 20px; font-weight: bold; display: inline; margin-left:8px;}
+        select {
+          height: 34px;
+        }
+        #search_area {
+              padding-bottom: 20px;
+        }
+        .section {
+          margin-bottom: 8px !important;
+        }
+    </style>
+    
+    <!-- Latest compiled and minified CSS -->
+    
+<body>
+    <div w3-include-html="partials/nav.html?nav=publications"></div> 
+    <div class="wrapper">
+        <div w3-include-html="partials/sider.html"></div> 
+        <div class="main-wrapper">
+
+
+<!-- start -->
+<section class="section book-section">
+    <h2 class="section-title"><i class="fa fa-book"></i>Publications</h2>
+    <div class="container-fluid" id="search_area">
+        <div style="">
+          <input type="text" class="bibtex_search form-control" id="searchbar" placeholder="Search publications">
+          <!-- <span class="help-block">Example: journal 2015 (finds the intersection of the two terms)</span> -->
+        </div>
+    
+        <div style="float:left;">
+          <select id="authorselectfirst" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" extra="first" search="author">
+            <option value="">Search First Author</option>
+          </select>
+        </div>
+        <div style="float:left;">
+          <select id="authorselect" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" search="author">
+            <option value="">Search Author</option>
+          </select>
+        </div>
+        <div style="float:left;">
+          <select id="topicselect" class="btn bibtex_search" style="border: 1px solid lightgrey;">
+            <option value="">Search Type</option>
+            <!-- Add topic values here -->
+            <option value="journal">Journal</option>
+            <option value="conference">Conference</option>
+            <option value="chapter">Book Chapter</option>
+          </select>
+        </div>
+        <div class="searchbar">
+          <div style="float:left;">
+          <button type="button" class="btn btn-default" onclick="reset()">Reset</button>
+          </div>
+        </div>
+    </div>
+
+<!-- <div class="bibtex_structure">
+  <div class="group year" extra="DESC string">
+      <a href="#top" style="display: inline"> &nbsp;<b>&#x025B4;Top</b> </a>
+      <div style="padding-bottom:10px;"></div>
+      <div class="sort journal" extra="DESC string">
+        <div class="templates"></div>
+      </div>
+  </div>
+</div> -->
+
+<!-- <div class="bibtex_topics"> </div> -->
+
+<div class="bibtex_structure">
+  <div class="sections bibtextypekey">
+    &nbsp;&nbsp;<a href="#top" style="display: inline"><b>&#x025B4;&nbsp;Top</b> </a>
+      <div class="section @article" title="Refereed Articles"></div>
+      <div class="section @inproceedings" title="Conference and Workshop Papers"></div>
+      <div class="section @book" title="Books"></div>
+      <div class="section @incollection" title="Books Chapters"></div>
+      <div class="section @misc|@phdthesis|@mastersthesis|@bachelorsthesis|@techreport" title="Other Publications"></div>
+      <div class="section @majorsubmit" title="Major Revision Submitted"></div>
+      <div class="section @submit" title="Submitted"></div>
+
+      <div class="sort year" extra="DESC string">
+        <div class="templates"></div>
+      </div>
+  </div>
+</div>
+
+<div id="bibtex_display">
+  
+  <div class="bibtex_template" style="display: none;">
+    <ul> <li>
+      <span class="if title">
+        <a class="bibtexVar" target="_blank" href="paper/+BIBTEXKEY+.pdf" extra="BIBTEXKEY">
+            <span style="text-decoration: underline;" class="title"></span>
+        </a>
+      </span>
+      <div class="if author">
+        <span class="author"></span>
+      </div>
+      <div>
+        <span class="if journal"><em><span class="journal"></span></em>,</span>
+        <span class="if publisher"><em><span class="publisher"></span></em>,</span>
+        <span class="if booktitle">In <em><span class="booktitle"></span></em>,</span>
+        <span class="if address"><span class="address"></span>,</span>
+        <span class="if month"><span class="month"></span>,</span>
+        <span class="if year"><span class="year"></span>.</span>
+        <span class="if note"><span class="note"></span></span>
+        <a class="bibtexVar" role="button" data-toggle="collapse" href="#bib+BIBTEXKEY+" aria-expanded="false" aria-controls="bib+BIBTEXKEY+" extra="BIBTEXKEY">
+          [bib]
+        </a>
+      </div>
+      <div class="bibtexVar collapse" id="bib+BIBTEXKEY+" extra="BIBTEXKEY">
+          <div class="well">
+            <pre><span class="bibtexraw noread"></span></pre>
+          </div>
+      </div>
+      <div style="display:none"><span class="bibtextype"></span></div>
+    </li></ul>
+  </div>
+  
+</div>
+</section>
+
+
+<!-- end -->
+
+
+        </div><!--//main-body-->
+    </div>
+    <div w3-include-html="partials/footer.html"></div> 
+    <script>
+        w3IncludeHTML();
+    </script>
+    <!-- Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>    
+    <!-- custom js -->
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script>
+            //$("#homenav").removeClass("active");
+            //$("#publicationnav").addClass("active");
+            //$("#homenav").html( "ddd" );
+    </script>
+
+</body>
+</html> 
