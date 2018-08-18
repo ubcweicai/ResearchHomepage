@@ -59,7 +59,8 @@ dark
 }
 
 a {
-  color: #DDA300;
+  color: #750F6D;
+  /*color: #DDA300;*/
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -ms-transition: all 0.4s ease-in-out;
@@ -68,7 +69,8 @@ a {
 
 
 .sidebar-wrapper a {
-  color: #DDA300;
+  color: #750F6D;
+  /*color: #DDA300;*/
 }
 
 .sidebar-wrapper .fa {
@@ -113,7 +115,7 @@ a {
   float: right; 
   margin-left: 15px; 
   margin-top: 5px;
-  width:60px
+  width:73px
 }
 
 .table th {
@@ -233,7 +235,7 @@ p {
   font-size: 14px;
 }
 .sidebar-wrapper .container-block{
-  padding: 0px 30px 15px 30px;
+  padding: 0px 30px 25px 30px;
 }
 .sidebar-wrapper .container-block-title {
   text-transform: uppercase;
