@@ -2,6 +2,7 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<script src="partials/w3.js"></script>
 <script src="partials/w3data.js"></script>
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 <div w3-include-html="partials/header.html"></div> 
@@ -167,7 +168,27 @@
     </div>
     <div w3-include-html="partials/footer.html"></div> 
     <script>
-        w3IncludeHTML();
+        w3.includeHTML(myCallback);
+        function myCallback() {
+            $("#homenav").removeClass("active");
+            $("#researchnav").addClass("active");
+            $("#publicationnav").removeClass("active");
+            $("#teachingnav").removeClass("active");
+            $("#servicenav").removeClass("active");
+            $("#awardnav").removeClass("active");
+            $("#contactnav").removeClass("active");
+            $(".navbar-nav li").mouseover(
+                function() {
+                    $(this).addClass("active");
+                }
+            );
+            $(".navbar-nav li").mouseout(
+                function() {
+                    if(this.id!="researchnav")
+                        $(this).removeClass("active");
+                }
+            );
+        }
     </script>
     <!-- Javascript -->          
     <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>
