@@ -25,6 +25,10 @@ dark
 221815
 */
 
+.table {
+	border-color:#CCCCCC;
+}
+
 .navbar-inverse {
     background: rgba(117,15,109,0.7);
     border-color: rgba(117,15,109,0.7);
